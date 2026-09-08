@@ -1,10 +1,10 @@
-# Security Audit — `miso_credit`
+# Security Audit — `credit`
 
 **Revision:** working tree @ 2026-08-23 (the `misonetwork` workspace is not a
 git repository — `git rev-parse` fails; no commit hash exists). No
 dependencies. **Date:** 2026-08-23 · **Toolchain:** sui 1.77.2-51d177ad7d65
 
-Audit of `miso_credit` (82 LOC, `sources/credit.move`), the `Credit<Role>`
+Audit of `credit` (82 LOC, `sources/credit.move`), the `Credit<Role>`
 value type consumed by the three credits extensions (`recording_credits`,
 `release_credits`, `composition_credits`). Verdict: **safe to publish — no
 findings.**
@@ -34,7 +34,7 @@ no dynamic fields, and touches no objects. The only money-adjacent question is
 whether credits data can redirect royalties — **it cannot**: attribution is
 never read by the economics. Verified by grepping all Move sources in the
 workspace: only the three credits extensions and their tests import
-`miso_credit`, and `royalty-pool/sources/pool.move` contains no reference to
+`credit`, and `royalty-pool/sources/pool.move` contains no reference to
 any credits module (its only "credit" matches are address-balance credits in
 doc comments). Royalties flow through share ownership settled at
 `recording::new` and track splits in `Release` — both in the separately

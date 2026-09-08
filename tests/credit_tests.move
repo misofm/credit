@@ -1,7 +1,7 @@
 #[test_only]
-module miso_credit::credit_tests;
+module credit::credit_tests;
 
-use miso_credit::credit;
+use credit::credit;
 use std::string::String;
 use std::unit_test::assert_eq;
 
