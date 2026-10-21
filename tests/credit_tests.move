@@ -6,7 +6,7 @@ use std::string::String;
 use std::unit_test::assert_eq;
 use sui::event;
 
-// Error codes from credit.move
+// Must match credit.move
 const EMaxDisplayNameLengthExceeded: u64 = 30;
 const EEmptyString: u64 = 31;
 const ENoRoles: u64 = 32;
@@ -17,14 +17,12 @@ const EDuplicateRoles: u64 = 40;
 const MAX_DISPLAY_NAME_LENGTH: u64 = 200;
 const MAX_ROLES: u64 = 50;
 
-/// Test role enum for credit tests.
 public enum TestRole has copy, drop, store {
     RoleA,
     RoleB,
     RoleC,
 }
 
-/// Creates a string of the given length filled with 'A' characters.
 fun long_string(len: u64): String {
     let mut s = vector<u8>[];
     len.do!(|_| s.push_back(65));
@@ -95,7 +93,6 @@ fun test_new_no_roles() {
 
 #[test]
 fun test_new_at_max_roles() {
-    // u64 as the role type: 50 distinct values.
     let mut roles = vector[];
     MAX_ROLES.do!(|i| roles.push_back(i));
     let events_before = event::num_events();
