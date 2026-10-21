@@ -1,7 +1,6 @@
 // Copyright (c) Miso Labs, Inc.
 // SPDX-License-Identifier: FSL-1.1-ALv2
 
-/// A party's credit on a work: a display name with one or more roles.
 module credit::credit;
 
 // === Imports ===
@@ -18,12 +17,8 @@ const EDuplicateRoles: u64 = 4;
 
 // === Constants ===
 
-/// In bytes.
 const MAX_DISPLAY_NAME_LENGTH: u64 = 200;
 const MIN_ROLES: u64 = 1;
-/// Maximum number of roles in a credit. A sanity rail, not a domain rule:
-/// consumers enforce their own (tighter) caps at their use sites; this bounds
-/// the worst case for every consumer and keeps the duplicate check trivial.
 const MAX_ROLES: u64 = 50;
 
 // === Structs ===

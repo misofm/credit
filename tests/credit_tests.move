@@ -9,7 +9,6 @@ use std::unit_test::assert_eq;
 use sui::event;
 use credit::credit;
 
-// Must match credit.move
 const MAX_DISPLAY_NAME_LENGTH: u64 = 200;
 const MAX_ROLES: u64 = 50;
 
