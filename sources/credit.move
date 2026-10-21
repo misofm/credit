@@ -4,14 +4,17 @@
 /// A party's credit on a work: a display name with one or more roles.
 module credit::credit;
 
+// === Imports ===
+
 use std::string::String;
 
-// === Structs ===
+// === Errors ===
 
-public struct Credit<Role: copy + drop + store> has copy, drop, store {
-    display_name: String,
-    roles: vector<Role>,
-}
+const EMaxDisplayNameLengthExceeded: u64 = 0;
+const EEmptyString: u64 = 1;
+const ENoRoles: u64 = 2;
+const EMaxRolesExceeded: u64 = 3;
+const EDuplicateRoles: u64 = 4;
 
 // === Constants ===
 
@@ -23,18 +26,19 @@ const MIN_ROLES: u64 = 1;
 /// the worst case for every consumer and keeps the duplicate check trivial.
 const MAX_ROLES: u64 = 50;
 
-// === Errors ===
+// === Structs ===
 
-const EMaxDisplayNameLengthExceeded: u64 = 30;
-const EEmptyString: u64 = 31;
-const ENoRoles: u64 = 32;
-const EMaxRolesExceeded: u64 = 33;
-
-const EDuplicateRoles: u64 = 40;
+public struct Credit<Role: copy + drop + store> has copy, drop, store {
+    display_name: String,
+    roles: vector<Role>,
+}
 
 // === Public Functions ===
 
-public fun new<Role: copy + drop + store>(display_name: String, roles: vector<Role>): Credit<Role> {
+public fun new<Role: copy + drop + store>(
+    display_name: String,
+    roles: vector<Role>,
+): Credit<Role> {
     assert!(!display_name.is_empty(), EEmptyString);
     assert!(display_name.length() <= MAX_DISPLAY_NAME_LENGTH, EMaxDisplayNameLengthExceeded);
     assert!(roles.length() >= MIN_ROLES, ENoRoles);
@@ -52,7 +56,7 @@ public fun new<Role: copy + drop + store>(display_name: String, roles: vector<Ro
     Credit { display_name, roles }
 }
 
-// === Public View Functions ===
+// === View Functions ===
 
 public fun display_name<Role: copy + drop + store>(self: &Credit<Role>): &String {
     &self.display_name
