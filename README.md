@@ -1,3 +1,5 @@
+> **Moved.** This repository is archived. Its packages now live in [`misofm/framework`](https://github.com/misofm/framework/tree/main/lib/credit) under `lib/credit/`.
+
 # `credit`
 
 `Credit<Role>` is a party's credit on a work: a display name with one or more roles. The shared value type behind the recording, release and composition credits extensions. See [AUDIT.md](./AUDIT.md).
